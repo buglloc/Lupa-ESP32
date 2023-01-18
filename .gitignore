@@ -1,0 +1,4 @@
+config.h
+debug.cfg
+debug_custom.json
+*.svd

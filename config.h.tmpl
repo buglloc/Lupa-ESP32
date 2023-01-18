@@ -1,0 +1,29 @@
+ #ifndef LUPA_CONFIG_H_
+ #define LUPA_CONFIG_H_
+
+// Local WiFi credentials
+const char *STA_SSID = "YourWiFiSSID";
+const char *STA_PSK = "YourWiFiPSK";
+const char *STA_HOSTNAME = "esp32-lupa";
+
+// Available values: https://github.com/thijse/Arduino-Log/#initialisation
+#define LOG_LEVEL LOG_LEVEL_VERBOSE
+
+const char *SSHD_HOSTKEY =
+  "-----BEGIN OPENSSH PRIVATE KEY-----\n"
+  "YourHostKey\n"
+  "-----END OPENSSH PRIVATE KEY-----";
+
+// root config
+const char *SSHD_ROOT_LOGIN = "root";
+const char *SSHD_ROOT_AUTH_KEYS[] = {
+  "ssh-rsa YourRootAuthorizedKey",
+  NULL
+};
+
+// misc config
+#define BUFF_SIZE 4096
+#define POLL_TIMEOUT_MS 50
+#define READ_TIMEOUT_MS 500
+
+#endif
