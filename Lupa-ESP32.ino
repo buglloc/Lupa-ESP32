@@ -3,6 +3,7 @@
 #include "sshd.h"
 #include "encoding.h"
 #include "handlers.h"
+#include "storage.h"
 #include "WiFi.h"
 #include <libssh/buffer.h>
 #include <ArduinoLog.h>
@@ -41,6 +42,13 @@ void setup() {
   g_buf = ssh_buffer_new();
   if (g_buf == NULL) {
     Log.warningln("not enough space to allocate buffer");
+    return;
+  }
+
+  Log.verboseln("Setup storage");
+  rc = storage_setup();
+  if (rc){
+    Log.fatal("Storage setup failed with error %d", rc);
     return;
   }
 
@@ -90,11 +98,11 @@ int client_talk(lupa_session *session, ssh_buffer buf) {
   PUSH_BE_U32(payload, 0, msg_len);
   if (rpc_io(session->chan, payload, 4, 0) == 4) {
     if (rpc_io(session->chan, ssh_buffer_get(buf), msg_len, 0) != msg_len) {
-      Log.warningln("unable to send response of len %d");
+      Log.warningln("unable to send response of len %d", msg_len);
       return -1;
     }
   } else {
-    Log.warningln("unable to send response len %d");
+    Log.warningln("unable to send response len");
     return -1;
   }
 

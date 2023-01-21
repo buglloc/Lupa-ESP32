@@ -1,6 +1,7 @@
 #ifndef LUPA_PRIV_H_
 #define LUPA_PRIV_H_
 
+
 /**
  * Get the argument count of variadic arguments
  */
