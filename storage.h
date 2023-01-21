@@ -17,7 +17,7 @@ nvs_handle_t g_storage;
 void gen_storage_key(char *out) {
   uint8_t raw[7];
   esp_fill_random(raw, 7);
-	sprintf(out, "%x%x%x%x%x%x%x", raw[0], raw[1], raw[2], raw[3], raw[4], raw[5], raw[6]);
+  sprintf(out, "%x%x%x%x%x%x%x", raw[0], raw[1], raw[2], raw[3], raw[4], raw[5], raw[6]);
 }
 
 int storage_setup() {
